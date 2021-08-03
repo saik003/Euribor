@@ -22,7 +22,7 @@
 <script lang="ts">
 import { ref, watch, defineComponent } from "vue";
 import { onMounted } from "vue";
-import { db } from "./../firebase";
+import { db } from "./../firebase.js";
 export default defineComponent({
   name: "Euribor",
   props: {
@@ -41,14 +41,14 @@ export default defineComponent({
 
       acEuriborRef
         .get()
-        .then((doc) => {
+        .then((doc: any) => {
           if (doc.exists) {
             euValue.value = doc.data().value;
           } else {
             console.log("No such document!");
           }
         })
-        .catch((error) => {
+        .catch((error: any) => {
           console.log("Error getting document:", error);
         });
     };
