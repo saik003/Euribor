@@ -31,9 +31,6 @@ const scraperObject = {
       })
       await browser.close();
       console.log("Finish......");
-      setTimeout(() => {
-        process.kill(process.pid, 'SIGTERM')  
-      }, 5000);
     }
 }
 
