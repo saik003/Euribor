@@ -12,7 +12,7 @@
           <h2 class="pt-16 text-7xl font-bold text-green-500">
             {{ euValue }}%
           </h2>
-          <p class="pt-4 font-bold">Valor a fecha: {{dateNow}}</p>
+          <p class="pt-4 font-bold">Valor a fecha: {{euDate}}</p>
         </div>
       </div>
     </div>
@@ -38,8 +38,6 @@ export default defineComponent({
     const dateNow = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     const getEuriborValue = async () => {
       let acEuriborRef = db.collection("euribor").doc("actual");
-      
-
       acEuriborRef
         .get()
         .then((doc: any) => {
@@ -47,6 +45,7 @@ export default defineComponent({
             euValue.value = doc.data().value;
             let _date:Date = new Date(doc.data().date);
             euDate.value=`${_date.getDate()}/${_date.getMonth()+1}/${_date.getFullYear()}`.toString();
+            console.log('Euribor capturado a fecha:' + _date);
           } else {
             console.log("No such document!");
           }
@@ -58,6 +57,7 @@ export default defineComponent({
     onMounted(getEuriborValue);
     return {
       euValue,
+      euDate,
       dateNow
     };
   },
