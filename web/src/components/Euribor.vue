@@ -33,6 +33,7 @@ export default defineComponent({
   },
   setup: () => {
     let euValue = ref(0);
+    let euDate = ref('');
     const current = new Date();
     const dateNow = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     const getEuriborValue = async () => {
@@ -44,6 +45,8 @@ export default defineComponent({
         .then((doc: any) => {
           if (doc.exists) {
             euValue.value = doc.data().value;
+            let _date:Date = new Date(doc.data().date);
+            euDate.value=`${_date.getDate()}/${_date.getMonth()+1}/${_date.getFullYear()}`.toString();
           } else {
             console.log("No such document!");
           }
